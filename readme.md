@@ -10,10 +10,25 @@ Fork of the WLED project where the Adalight USB serial protocol @115200 speed is
 1 For installation and configuration of WLED please refer to the WLED project: [link](https://github.com/Aircoookie/WLED)<br/>
 2 For configuration of HyperHDR please refer to the base project of AWA protocol: [link](https://github.com/awawa-dev/HyperSerialEsp8266)<br/><br/>
 
-<p align="center"> <b>ESP8266:</b><br/><img src="https://i.postimg.cc/CdT7hsG6/esp8266-flashing.jpg"/></p><br/>
+<p align="center"> <b>ESP32-C3, ESP32-S3</b> </p>
+
+```
+esptool.exe -p COM10 erase_flash
+esptool.exe -p COM10 write_flash 0x0 C3_bootloader.bin
+esptool.exe -p COM10 write_flash 0x8000 C3_partitions.bin
+esptool.exe -p COM10 write_flash 0x010000 WLED_0.14.0_ESP32-C3.bin 
+
+esptool.exe -p COM9 erase_flash
+esptool.exe -p COM9 write_flash 0x0 S3_noPSRAM_qio_bootloader.bin  // or with PSRAM
+esptool.exe -p COM9 write_flash 0x8000 S3_partitions_8MB.bin
+esptool.exe -p COM9 write_flash 0x010000 WLED_0.14.0_ESP32-S3_8MB.bin 
+```
+  
+<br/>
+<p align="center"> <b>ESP8266:</b><br/><br/><img src="https://i.postimg.cc/CdT7hsG6/esp8266-flashing.jpg"/></p><br/>
 <p align="center"> <img src="https://i.postimg.cc/C5fJpQqq/esp8266working.jpg"/></p><br/><br/>
 
-<p align="center"> <b>ESP32:</b><br/><img src="https://i.postimg.cc/dQrq3JrZ/esp32.jpg"/></p><br/>
+<p align="center"> <b>ESP32:</b><br/><br/><img src="https://i.postimg.cc/dQrq3JrZ/esp32.jpg"/></p><br/>
 <p align="center"> <img src="https://i.postimg.cc/1XrhH5rW/esp2.jpg"/></p><br/>
 
 <p align="center"> <b>WLED is receiving data from the USB serial port at @2000000 baud:</b><br/><img src="https://i.postimg.cc/76RXckf4/esp-rec.jpg"/></p><br/>
